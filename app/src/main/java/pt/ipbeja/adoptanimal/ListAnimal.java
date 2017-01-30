@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -37,13 +38,16 @@ public class ListAnimal extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        if (getActivity().findViewById(R.id.fragment_list_animal) != null) {
+        if (getActivity().findViewById(R.id.fragment_content_animal) == null){
             Toast.makeText(getActivity().getBaseContext(), "Clicked Portrait." + animals.animal[position],
                     Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else{
             Toast.makeText(getActivity().getBaseContext(), "Clicked Landscape." + animals.animal[position],
                     Toast.LENGTH_SHORT).show();
         }
 
+        TextView txtNote = (TextView) getActivity().findViewById(R.id.txtNote);
+        txtNote.setText(animals.animalContent[position]);
     }
 }
