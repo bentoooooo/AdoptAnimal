@@ -24,5 +24,6 @@ public class MainActivity extends FragmentActivity {
             animals.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, animals).commit();
         }
+
     }
 }
