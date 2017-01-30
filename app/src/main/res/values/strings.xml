@@ -2,8 +2,6 @@
     <string name="app_name">AdoptAnimal</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="content">Hello blank fragment</string>
     <string name="Content">Content</string>
     <string name="List">List</string>
 </resources>
