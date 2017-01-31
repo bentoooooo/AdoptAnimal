@@ -25,5 +25,4 @@ public class ContentAnimal extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_content_animal, container, false);
     }
-
 }

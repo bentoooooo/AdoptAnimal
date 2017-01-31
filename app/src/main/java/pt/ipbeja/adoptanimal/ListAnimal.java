@@ -3,6 +3,7 @@ package pt.ipbeja.adoptanimal;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,16 +39,26 @@ public class ListAnimal extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        if (getActivity().findViewById(R.id.fragment_content_animal) == null){
+        if (getActivity().findViewById(R.id.fragment_container) != null) {
             Toast.makeText(getActivity().getBaseContext(), "Clicked Portrait." + animals.animal[position],
                     Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             Toast.makeText(getActivity().getBaseContext(), "Clicked Landscape." + animals.animal[position],
                     Toast.LENGTH_SHORT).show();
         }
 
-        TextView txtNote = (TextView) getActivity().findViewById(R.id.txtNote);
-        txtNote.setText(animals.animalContent[position]);
+        if (getActivity().findViewById(R.id.fragment_container) != null) {
+            ContentAnimal ContentAnimal = new ContentAnimal();
+            Bundle args = new Bundle();
+            args.putInt("position", position);
+            ContentAnimal.setArguments(args);
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, ContentAnimal);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else {
+            TextView txtContent = (TextView) getActivity().findViewById(R.id.txtContent);
+            txtContent.setText(animals.animalContent[position]);
+        }
     }
 }
