@@ -46,7 +46,7 @@ public class ContentAnimal extends Fragment {
 
     public void updateArticleView( int position){
         TextView article = (TextView) getActivity().findViewById(R.id.txtContent);
-        article.setText(Animals.GetListContentWithNumber(position));
+        article.setText(Animals.ListContent.get(position));
     }
 }
 

@@ -1,8 +1,11 @@
 package pt.ipbeja.adoptanimal;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +14,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
         ListAnimal.OnListSelectedListener {
+
+    public int pos;
 
     public void onContentSelected(int position) {
         if (findViewById(R.id.fragment_container) != null){
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager().findFragmentById(R.id.fragment_content_animal);
         ContentFrag.updateArticleView(position);
         }
-
+        pos = position;
         }
 
     @Override
@@ -85,18 +90,19 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager().beginTransaction()
         .add(R.id.fragment_container, listFragment).commit();
         }
-
         }
 
     public void Initialize(){
 
         DBHelper db = new DBHelper(this);
-        //db.insertAnimals("Animal1", "Cão1");
-        //db.insertAnimals("Animal2", "Gato2");
+        //db.insertAnimals("Animal1", "Cão1", "R.drawable.animal1", "https://goo.gl/maps/MeUV5yRDjQ22", "tel: 968526910");
+        //db.insertAnimals("Animal2", "Gato2", "R.drawable.animal2", "https://goo.gl/maps/yKPHE2PxZj72", "tel: 969762806");
 
         Animals.ListAnimal = db.getAllNames();
         Animals.ListContent = db.getAllContent();
-
+        Animals.ListPhoto = db.getAllPhoto();
+        Animals.ListGPS = db.getAllGPS();
+        Animals.ListPhone = db.getAllPhone();
         //Animals.InsertAnimal("Animal1",
                 //"Cão1");
 
@@ -108,6 +114,15 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onStart(){
         super.onStart();
+    }
+
+    public void btnCall_onClick(View view) {
+
+        Uri number = Uri.parse(Animals.ListPhone.get(pos));
+        Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+    }
+
+    public void btnGPS_onClick(View view) {
 
 
     }

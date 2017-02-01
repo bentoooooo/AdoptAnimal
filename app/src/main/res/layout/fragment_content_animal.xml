@@ -30,14 +30,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/btnCall" />
+            android:id="@+id/btnCall"
+            android:onClick="btnCall_onClick" />
 
                 <Button
                     android:text="Localização"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/btnGPS" />
+                    android:id="@+id/btnGPS"
+                    android:onClick="btnGPS_onClick" />
 
         </LinearLayout>
 
