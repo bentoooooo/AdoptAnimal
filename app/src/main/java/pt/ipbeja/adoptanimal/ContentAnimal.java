@@ -14,7 +14,6 @@ import android.widget.TextView;
  */
 public class ContentAnimal extends Fragment {
 
-
     public ContentAnimal() {
         // Required empty public constructor
     }
@@ -38,12 +37,16 @@ public class ContentAnimal extends Fragment {
         if (args != null) {
             // Set article based on argument passed in
             int currentPosition = args.getInt("position");
-            TextView article = (TextView) getActivity().findViewById(R.id.txtContent);
-            article.setText(animals.animalContent[currentPosition]);
+            updateArticleView(currentPosition);
         }
         else{
-            TextView article = (TextView) getActivity().findViewById(R.id.txtContent);
-            article.setText(animals.animalContent[0]);
+            updateArticleView(0);
         }
     }
+
+    public void updateArticleView( int position){
+        TextView article = (TextView) getActivity().findViewById(R.id.txtContent);
+        article.setText(Animals.GetListContentWithNumber(position));
+    }
 }
+
