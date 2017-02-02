@@ -36,14 +36,14 @@ public class ContentAnimal extends Fragment {
         if (args != null) {
             // Set article based on argument passed in
             int currentPosition = args.getInt("position");
-            updateArticleView(currentPosition);
+            updateContentView(currentPosition);
         }
         else{
-            updateArticleView(0);
+            updateContentView(0);
         }
     }
 
-    public void updateArticleView( int position){
+    public void updateContentView( int position){
         TextView content = (TextView) getActivity().findViewById(R.id.txtContent);
         content.setText(Animals.ListContent.get(position));
         ImageView photo = (ImageView) getActivity().findViewById(R.id.imageAnimal);

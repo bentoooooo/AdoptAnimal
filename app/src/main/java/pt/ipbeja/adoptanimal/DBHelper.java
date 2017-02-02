@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private static final String DB_FILENAME = "Animals.db";
-    private static final int DB_VERSION = 13;
+    private static final int DB_VERSION = 16;
     private static final SQLiteDatabase.CursorFactory factory = null;
 
     public DBHelper(Context context) {

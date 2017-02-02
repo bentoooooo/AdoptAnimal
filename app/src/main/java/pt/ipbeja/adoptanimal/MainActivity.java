@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements
 
     //ContentSelecter
     public void onContentSelected(int position) {
+
         if (findViewById(R.id.fragment_container) != null) {
 
             // Create fragment and give it an argument specifying the article it should show
@@ -38,10 +39,12 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             ContentAnimal ContentFrag = (ContentAnimal)
                     getSupportFragmentManager().findFragmentById(R.id.fragment_content_animal);
-            ContentFrag.updateArticleView(position);
+            ContentFrag.updateContentView(position);
         }
         pos = position;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements
             Initialize();
         }
 
-        if (findViewById(R.id.fragment_container) != null) {
+        if (findViewById(R.id.fragment_container) != null){
 
             // However, if we're being restored from a previous state,
             // then we don't need to do anything and should return or else
@@ -74,6 +77,27 @@ public class MainActivity extends AppCompatActivity implements
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, listFragment).commit();
         }
+
+        if (findViewById(R.id.fragment_list_animal) != null){
+
+            // However, if we're being restored from a previous state,
+            // then we don't need to do anything and should return or else
+            // we could end up with overlapping fragments.
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            // Create a new Fragment to be placed in the activity layout
+            ListAnimal listFragment = new ListAnimal();
+
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
+            listFragment.setArguments(getIntent().getExtras());
+
+            // Add the fragment to the 'fragment_container' FrameLayout
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_list_animal, listFragment).commit();
+        }
     }
 
     //Method that create the data for the database, and populate the Animals
@@ -81,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements
 
         DBHelper db = new DBHelper(this);
 
-        /* //Populate the Database
+         //Populate the Database
         db.insertAnimals("Putchi - Gata", "Gata - Europeu Comum\n" +
                 "Idade: Jovem\n" +
                 "Sexo: Fêmea\n" +
@@ -153,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements
                 "Localidade: Odemira (Beja)\n" +
                 "Tel: 938335738\n" +
                 "Email: cirnetrigo@gmail.com", R.drawable.rosa, "https://goo.gl/maps/8myrpE7iMn62", "tel: 938335738");
-*/
+
         //Populate the Animals with the database data
         Animals.ListAnimal = db.getAllNames();
         Animals.ListContent = db.getAllContent();
