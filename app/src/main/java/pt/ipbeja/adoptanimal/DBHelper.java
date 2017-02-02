@@ -14,13 +14,11 @@ import java.util.List;
  */
 
 public class DBHelper extends SQLiteOpenHelper {
-
     //--------------------------------- TABLES ---------------------------------//
     private static final int I_ANIMALS = 0;
     private static final String[] TableNames = {
             "animals"
     };
-
     //--------------------------------- ANIMALS TABLE ---------------------------------//
     private static final String T_ANIMALS_ID = "_id_animal";
     private static final String T_ANIMALS_NAME = "name_animal";
@@ -28,7 +26,6 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String T_ANIMALS_PHOTO = "photo_animal";
     private static final String T_ANIMALS_GPS = "gps_animal";
     private static final String T_ANIMALS_PHONE = "phone_animal";
-
     private static final String T_CREATE_ANIMALS =
             "CREATE TABLE " + TableNames[I_ANIMALS] + "(" +
                     T_ANIMALS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -37,22 +34,16 @@ public class DBHelper extends SQLiteOpenHelper {
                     T_ANIMALS_PHOTO + " INTEGER , " +
                     T_ANIMALS_GPS + " TEXT , " +
                     T_ANIMALS_PHONE + " TEXT)";
-
     //--------------------------------- CREATE TABLES ---------------------------------//
     private static final String[] T_CREATE = {
             T_CREATE_ANIMALS};
-
     //-------------------------------------- END --------------------------------------//
-
-
     private static final String DB_FILENAME = "Animals.db";
-    private static final int DB_VERSION = 16;
+    private static final int DB_VERSION = 17;
     private static final SQLiteDatabase.CursorFactory factory = null;
-
     public DBHelper(Context context) {
         super(context, DB_FILENAME, factory, DB_VERSION);
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         for (String createTable : T_CREATE) {

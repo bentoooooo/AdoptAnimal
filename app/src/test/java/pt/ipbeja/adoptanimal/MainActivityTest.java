@@ -27,7 +27,6 @@ public class MainActivityTest {
         String phoneString = "";
         boolean okPhone = false;
         int counter = 0;
-
         //Get all phone digits
         for (int i = 0; i < str.length() ; i++) {
             c = str.charAt(i);
@@ -35,8 +34,6 @@ public class MainActivityTest {
                 phoneString += c;
             }
         }
-
-
         //If the phone has 9 digits
         if(phoneString.length() == 9) {
             phoneString = "";
@@ -51,7 +48,6 @@ public class MainActivityTest {
                     break;
                 }
             }
-
             //Test if the number is from a national operator 91/92/93/96
             int phone = Integer.parseInt(phoneString);
 
@@ -72,8 +68,6 @@ public class MainActivityTest {
                 }
             }
         }
-
         assertEquals(true, okPhone);
     }
-
 }
