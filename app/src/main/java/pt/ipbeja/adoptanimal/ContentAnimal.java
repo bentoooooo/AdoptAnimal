@@ -1,13 +1,12 @@
 package pt.ipbeja.adoptanimal;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,8 +44,10 @@ public class ContentAnimal extends Fragment {
     }
 
     public void updateArticleView( int position){
-        TextView article = (TextView) getActivity().findViewById(R.id.txtContent);
-        article.setText(Animals.ListContent.get(position));
+        TextView content = (TextView) getActivity().findViewById(R.id.txtContent);
+        content.setText(Animals.ListContent.get(position));
+        ImageView photo = (ImageView) getActivity().findViewById(R.id.imageAnimal);
+        photo.setImageResource(Animals.ListPhoto.get(position));
     }
 }
 

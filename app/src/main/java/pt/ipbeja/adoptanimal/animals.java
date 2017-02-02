@@ -1,7 +1,5 @@
 package pt.ipbeja.adoptanimal;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class Animals {
 
     static List<String> ListAnimal = new ArrayList<String>();
     static List<String> ListContent = new ArrayList<String>();
-    static List<String> ListPhoto = new ArrayList<String>();
+    static List<Integer> ListPhoto = new ArrayList<Integer>();
     static List<String> ListGPS = new ArrayList<String>();
     static List<String> ListPhone = new ArrayList<String>();
 

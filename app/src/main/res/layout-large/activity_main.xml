@@ -1,18 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <fragment android:name="pt.ipbeja.adoptanimal.ListAnimal"
-        android:id="@+id/headlines_fragment"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></FrameLayout>
 
-    <fragment android:name="pt.ipbeja.adoptanimal.ContentAnimal"
-        android:id="@+id/article_fragment"
-        android:layout_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        app:srcCompat="@drawable/jaguar" />
 
 </LinearLayout>
