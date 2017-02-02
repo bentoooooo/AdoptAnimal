@@ -27,35 +27,52 @@ public class MainActivityTest {
         String phoneString = "";
         boolean okPhone = false;
         int counter = 0;
+
+        //Get all phone digits
         for (int i = 0; i < str.length() ; i++) {
             c = str.charAt(i);
             if (Character.isDigit(c)) {
                 phoneString += c;
-                counter++;
-            }
-            if (counter == 2)
-            {
-                break;
             }
         }
-        int phone = Integer.parseInt(phoneString);
 
-        for (int i = 0; i < 9 ; i++) {
-            switch (phone) {
-                case 91:
-                    okPhone = true;
+
+        //If the phone has 9 digits
+        if(phoneString.length() == 9) {
+            phoneString = "";
+            //Get first two numbers of the number
+            for (int i = 0; i < str.length(); i++) {
+                c = str.charAt(i);
+                if (Character.isDigit(c)) {
+                    phoneString += c;
+                    counter++;
+                }
+                if (counter == 2) {
                     break;
-                case 92:
-                    okPhone = true;
-                    break;
-                case 93:
-                    okPhone = true;
-                    break;
-                case 96:
-                    okPhone = true;
-                    break;
+                }
+            }
+
+            //Test if the number is from a national operator 91/92/93/96
+            int phone = Integer.parseInt(phoneString);
+
+            for (int i = 0; i < 9; i++) {
+                switch (phone) {
+                    case 91:
+                        okPhone = true;
+                        break;
+                    case 92:
+                        okPhone = true;
+                        break;
+                    case 93:
+                        okPhone = true;
+                        break;
+                    case 96:
+                        okPhone = true;
+                        break;
+                }
             }
         }
+
         assertEquals(true, okPhone);
     }
 

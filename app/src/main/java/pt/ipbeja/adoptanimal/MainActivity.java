@@ -10,14 +10,15 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity implements
         ListAnimal.OnListSelectedListener {
 
+    //Position returned from ListAnimal
     public int pos;
+
+    //Number for the help
     static String helpNumber = "tel: 968526910";
 
+    //ContentSelecter
     public void onContentSelected(int position) {
         if (findViewById(R.id.fragment_container) != null) {
-
-            /*Toast.makeText(getActivity().getBaseContext(), "Clicked Portrait." + NewsData.Headlines[pos],
-                    Toast.LENGTH_SHORT).show();*/
 
             // Create fragment and give it an argument specifying the article it should show
             ContentAnimal newContent = new ContentAnimal();
@@ -25,16 +26,16 @@ public class MainActivity extends AppCompatActivity implements
             args.putInt("position", position);
             newContent.setArguments(args);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
             // Replace whatever is in the fragment_container view with this fragment,
             // and add the transaction to the back stack so the user can navigate back
             transaction.replace(R.id.fragment_container, newContent);
             transaction.addToBackStack(null);
+
             // Commit the transaction
             transaction.commit();
 
         } else {
-            /*Toast.makeText(getActivity().getBaseContext(), "Clicked Landscape." + NewsData.Headlines[pos],
-                    Toast.LENGTH_SHORT).show();*/
             ContentAnimal ContentFrag = (ContentAnimal)
                     getSupportFragmentManager().findFragmentById(R.id.fragment_content_animal);
             ContentFrag.updateArticleView(position);
@@ -47,25 +48,11 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*Toast.makeText(this, NewsData.GetArticleWithNumber(-1),
-                Toast.LENGTH_SHORT).show();*/
-
         if (savedInstanceState == null) {
+
+            //Call to the method that create the data for the database, and populate the Animals
             Initialize();
-            //NewsData.ListArticles();
-
-            /*Log.d("MainActivity:",
-                    Integer.toString(NewsData.GetNumberOfArticles()));*/
         }
-
-        /*Toast.makeText(this, NewsData.Headlines[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, NewsData.Articles[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, NewsData.Headlines[1], Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, NewsData.Articles[1], Toast.LENGTH_SHORT).show();*/
-
-
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
 
         if (findViewById(R.id.fragment_container) != null) {
 
@@ -89,10 +76,12 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    //Method that create the data for the database, and populate the Animals
     public void Initialize() {
 
         DBHelper db = new DBHelper(this);
-        /*
+
+        /* //Populate the Database
         db.insertAnimals("Putchi - Gata", "Gata - Europeu Comum\n" +
                 "Idade: Jovem\n" +
                 "Sexo: Fêmea\n" +
@@ -164,19 +153,13 @@ public class MainActivity extends AppCompatActivity implements
                 "Localidade: Odemira (Beja)\n" +
                 "Tel: 938335738\n" +
                 "Email: cirnetrigo@gmail.com", R.drawable.rosa, "https://goo.gl/maps/8myrpE7iMn62", "tel: 938335738");
-
-        */
+*/
+        //Populate the Animals with the database data
         Animals.ListAnimal = db.getAllNames();
         Animals.ListContent = db.getAllContent();
         Animals.ListPhoto = db.getAllPhoto();
         Animals.ListGPS = db.getAllGPS();
         Animals.ListPhone = db.getAllPhone();
-        //Animals.InsertAnimal("Animal1",
-        //"Cão1");
-
-        //Animals.InsertAnimal("Animal2",
-        //"Gato1");
-
     }
 
     @Override
@@ -184,24 +167,29 @@ public class MainActivity extends AppCompatActivity implements
         super.onStart();
     }
 
+    //Button from the ContentAnimal (fragment_content_animal.xml) to call the owner of the animal
     public void btnCall_onClick(View view) {
         Uri number = Uri.parse(Animals.ListPhone.get(pos));
         Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
         startActivity(callIntent);
     }
 
+    //Button from the ContentAnimal (fragment_content_animal.xml) to know the location of the animal
     public void btnGPS_onClick(View view) {
-        Intent mapGoogle = new Intent(MainActivity.this, GPSCoordinates.class);
-        mapGoogle.putExtra("gps", Animals.ListGPS.get(pos));
-        startActivity(mapGoogle);
+
+        Uri gps = Uri.parse(Animals.ListGPS.get(pos));
+        Intent callGPS = new Intent(Intent.ACTION_VIEW, gps);
+        startActivity(callGPS);
     }
 
+    //Button from the developer to call for help, if needed
     public void btnHelp_onClick(View view) {
         Uri number = Uri.parse(helpNumber);
         Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
         startActivity(callIntent);
     }
 
+    //UnitTest: Will test if the number has 9 digits and if it is from a national operator 91/92/93/96
     public static String testPhoneOperator() {
         return helpNumber;
     }

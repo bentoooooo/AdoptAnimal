@@ -38,7 +38,7 @@ public class ListAnimal extends ListFragment {
         setListAdapter(adapter);
 
         return super.onCreateView(inflater, container, savedInstanceState);
-        // Inflate the layout for this fragment
+        //Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_headlines, container, false);
     }
 
